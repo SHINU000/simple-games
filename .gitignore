@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Zone</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+      text-align: center;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    #game-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Game Zone</h1>
+  </header>
+
+  <main>
+    <div id="game-container">
+      <h2>Guess the Number Game</h2>
+      <p>Guess a number between 1 and 10:</p>
+      <input type="number" id="user-input">
+      <button onclick="checkGuess()">Submit Guess</button>
+      <p id="result"></p>
+      <button onclick="resetGame()">Play Again</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Game Zone. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // JavaScript for the game logic
+    var secretNumber = Math.floor(Math.random() * 10) + 1;
+    var attempts = 0;
+
+    function checkGuess() {
+      var userInput = parseInt(document.getElementById('user-input').value);
+      if (isNaN(userInput) || userInput < 1 || userInput > 10) {
+        alert('Please enter a valid number between 1 and 10.');
+        return;
+      }
+
+      attempts++;
+      if (userInput === secretNumber) {
+        document.getElementById('result').innerHTML = `Congratulations! You guessed the correct number in ${attempts} attempts.`;
+      } else {
+        document.getElementById('result').innerHTML = `Try again!`;
+      }
+    }
+
+    function resetGame() {
+      secretNumber = Math.floor(Math.random() * 10) + 1;
+      attempts = 0;
+      document.getElementById('user-input').value = '';
+      document.getElementById('result').innerHTML = '';
+    }
+  </script>
+</body>
+</html>
